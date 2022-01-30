@@ -4,7 +4,10 @@ const Review = require('./review')
 
 const CampgroundSchema = new Schema({
     title: String,
-    image: String,
+    image: {
+        type: String, 
+        default: 'https://source.unsplash.com/collection/220381/1600x900'     //OR set default: ''
+    },
     price: Number,
     description: String,
     location: String,
