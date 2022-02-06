@@ -6,9 +6,14 @@ const Campground = require('../models/campground')
 const {isLoggedIn,isAuthor} = require('../middleware')
 const campgrounds = require('../controllers/campgrounds')
 
+const multer  = require('multer')
+const {storage} = require('../cloudinary');
+const upload = multer({ storage })
+
 router.route('/')
     .get(campgrounds.index)
-    .post(isLoggedIn,catchAsync(campgrounds.PostNewForm))
+    .post(isLoggedIn,upload.array('campground[image]'),catchAsync(campgrounds.PostNewForm))
+    
 
     
 router.get('/new', isLoggedIn,campgrounds.newForm)
